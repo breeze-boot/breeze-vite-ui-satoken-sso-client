@@ -51,7 +51,7 @@ const useUserStore = defineStore('User', {
     async storeUserInfo(): Promise<LoginResponseData> {
       const response: any = await userInfo()
 
-      if (response.data) {
+      if (response.code === '0000' && response.data) {
         const user_info = response?.data as UserInfoData
         // 持久化
         this.userInfo = user_info as UserInfoData
@@ -98,14 +98,15 @@ const useUserStore = defineStore('User', {
     /**
      * 保存登录信息
      */
-    async storeLoginInfo(accessToken: string) {
-      this.accessToken = accessToken
+    async storeLoginInfo(data: any) {
+      this.accessToken = data.accessToken
       SET_STRING_STORAGE(StorageName.AccessToken, this.accessToken as string)
     },
     /**
      * 保存租户信息
      */
     storeTenantId(tenantId: string) {
+      debugger
       this.tenantId = tenantId
       CookiesStorage.set(CookiesKey.XTenantId, tenantId)
     },
