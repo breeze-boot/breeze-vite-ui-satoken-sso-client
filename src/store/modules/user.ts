@@ -74,15 +74,13 @@ const useUserStore = defineStore('User', {
      * 退出登录
      */
     async logout() {
-      let href = ''
-      const env = import.meta.env.VITE_APP_BASE_API
-      if (env === 'development') {
-        href = import.meta.env.VITE_APP_SSO_BASE_SERVER
-      } else {
-        href = import.meta.env.VITE_APP_SSO_BASE_SERVER + '/api'
+      let href = import.meta.env.VITE_APP_SSO_BASE_SERVER
+      const env = import.meta.env.MODE
+      if (env !== 'development') {
+        href += '/api'
       }
       href += '/sso/logout?satoken=' + this.accessToken + '&back=' + encodeURIComponent(location.origin)
-      location.href = href
+      window.location.href = href
       await this.clearLoginInfo()
     },
     /**
@@ -98,15 +96,14 @@ const useUserStore = defineStore('User', {
     /**
      * 保存登录信息
      */
-    async storeLoginInfo(data: any) {
-      this.accessToken = data.accessToken
+    async storeLoginInfo(accessToken: string) {
+      this.accessToken = accessToken
       SET_STRING_STORAGE(StorageName.AccessToken, this.accessToken as string)
     },
     /**
      * 保存租户信息
      */
     storeTenantId(tenantId: string) {
-      debugger
       this.tenantId = tenantId
       CookiesStorage.set(CookiesKey.XTenantId, tenantId)
     },

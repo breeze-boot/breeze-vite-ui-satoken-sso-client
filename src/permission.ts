@@ -6,6 +6,7 @@ import pinia from '@/store'
 import useUserStore from '@/store/modules/user'
 import { GET_STRING_STORAGE, SET_STRING_STORAGE } from '@/utils/storage.ts'
 import { StorageName } from '@/types/types.ts'
+import { checkIsLogin } from '@/api/login'
 
 nprogress.configure({ showSpinner: false })
 
@@ -20,9 +21,9 @@ router.beforeEach(async (to, from, next) => {
   nprogress.start()
 
   const token = userStore.accessToken as string
-
+  const res = await checkIsLogin()
   // 用户未登录
-  if (!token) {
+  if (!token || !res.data) {
     if (whiteRoute.includes(to.path)) {
       next() // 白名单路由直接放行
       return

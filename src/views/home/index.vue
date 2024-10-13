@@ -24,7 +24,11 @@ let userStore = useUserStore()
       </div>
     </div>
   </el-card>
-  <div class="bottom"></div>
+  <div class="bottom">
+    <p class="logout">
+      <el-button type="primary" @click="userStore.logout()">退出登录</el-button>
+    </p>
+  </div>
 </template>
 
 <style lang="scss" scoped>

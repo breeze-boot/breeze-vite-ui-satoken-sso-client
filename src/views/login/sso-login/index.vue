@@ -77,7 +77,7 @@ const handleDoLoginByTicket = async (ticket: string, back: string) => {
     await userStore.storeUserInfo()
     location.href = decodeURIComponent(back)
   } else {
-    alert(response.message)
+    alert(response.msg)
   }
 }
 </script>
