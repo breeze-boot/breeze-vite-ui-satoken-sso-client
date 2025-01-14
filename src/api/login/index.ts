@@ -43,9 +43,9 @@ export function doLoginByTicket(ticket: string) {
 /**
  * sso 用户信息
  */
-export function userInfo() {
+export function userInfo(satoken: string) {
   return request({
-    url: '/sso/userInfo',
+    url: '/sso/userInfo?satoken=' + satoken,
     method: 'get',
   })
 }

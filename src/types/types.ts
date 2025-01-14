@@ -118,11 +118,8 @@ export enum StorageName {
   RoleCodes = 'ROLE_CODES',
   Permissions = 'PERMISSIONS',
   UserInfo = 'USER_INFO',
-  Columns = 'COLUMNS',
   AcceptLanguage = 'Accept-Language',
   Authorization = 'Authorization',
-  mixMenuRoutes = 'MIX_MENU_ROUTES',
-  menuRoutes = 'MENU_ROUTES',
 }
 
 /**

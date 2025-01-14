@@ -50,9 +50,10 @@ onMounted(async () => {
  * 页面加载后触发
  */
 onMounted(async () => {
-  const res: any = await checkIsLogin()
+  const accessToken: string = userStore.accessToken
+  const res: any = await checkIsLogin(accessToken)
   if (res.data) {
-    await userStore.storeUserInfo()
+    await userStore.storeUserInfo(accessToken)
   }
 })
 
@@ -74,7 +75,7 @@ const handleDoLoginByTicket = async (ticket: string, back: string) => {
   const response: any = await doLoginByTicket(ticket)
   if (response.code === '0000') {
     await userStore.storeLoginInfo(response.data)
-    await userStore.storeUserInfo()
+    await userStore.storeUserInfo(response.data)
     location.href = decodeURIComponent(back)
   } else {
     alert(response.msg)

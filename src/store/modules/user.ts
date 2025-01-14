@@ -48,8 +48,8 @@ const useUserStore = defineStore('User', {
     /**
      * 用户信息
      */
-    async storeUserInfo(): Promise<LoginResponseData> {
-      const response: any = await userInfo()
+    async storeUserInfo(satoken: string): Promise<LoginResponseData> {
+      const response: any = await userInfo(satoken)
 
       if (response.code === '0000' && response.data) {
         const user_info = response?.data as UserInfoData
