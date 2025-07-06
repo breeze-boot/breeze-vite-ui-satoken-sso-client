@@ -30,7 +30,7 @@ onMounted(async () => {
   changeDark()
   changeThemeColor()
   await initSelectTenant()
-  const res: any = await checkIsLogin()
+  const res: any = await checkIsLogin('')
   if (!userStore.tenantId) {
     ElMessage.warning('请先选择租户')
     return

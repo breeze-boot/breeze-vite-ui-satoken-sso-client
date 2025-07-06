@@ -79,7 +79,15 @@ const useUserStore = defineStore('User', {
       if (env !== 'development') {
         href += '/api'
       }
-      href += '/sso/logout?satoken=' + this.accessToken + '&back=' + encodeURIComponent(location.origin)
+      href +=
+        '/sso/logout?satoken=' +
+        this.accessToken +
+        '&back=' +
+        encodeURIComponent(location.origin) +
+        '&' +
+        CookiesKey.XTenantId +
+        '=' +
+        this.tenantId
       window.location.href = href
       await this.clearLoginInfo()
     },

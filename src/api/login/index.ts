@@ -9,7 +9,7 @@ import { PermissionResponseData } from './type'
 /**
  * 校验是否登录
  */
-export function checkIsLogin(): AxiosPromise<PermissionResponseData> {
+export function checkIsLogin(token: string): AxiosPromise<PermissionResponseData> {
   return request({
     url: '/sso/isLogin',
     method: 'get',

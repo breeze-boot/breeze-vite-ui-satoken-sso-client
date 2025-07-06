@@ -32,13 +32,20 @@ const getParam = function (name: string, defaultValue?: string) {
 // 获取参数
 const back = getParam('back') || (router.currentRoute.value.query.back as string)
 console.log('获取 back 参数：', back)
+
 const ticket = getParam('ticket') || (router.currentRoute.value.query.ticket as string)
 console.log('获取 ticket 参数：', ticket)
+
+const XTenantId = getParam(CookiesKey.XTenantId) || (router.currentRoute.value.query['X-Tenant-Id'] as string)
+console.log('获取 ticket 参数：', XTenantId)
 
 /**
  * 页面加载后触发
  */
 onMounted(async () => {
+  if (XTenantId) {
+    userStore.storeTenantId(XTenantId)
+  }
   if (ticket) {
     await handleDoLoginByTicket(ticket, back)
   } else {
